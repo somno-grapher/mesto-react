@@ -1,20 +1,10 @@
 function Main(props) {
 
-  function handleEditAvatarClick() {
-    const editAvatarPopup = document.querySelector('.popup_type_update-avatar');
-    editAvatarPopup.classList.add('popup_opened');
-  }
-
-  function handleEditProfileClick() {
-    const editProfilePopup = document.querySelector('.popup_type_edit-profile');
-    editProfilePopup.classList.add('popup_opened');
-  }
-
   return (
     <main className="content page__content">
       <section className="profile content__profile">
         <button className="profile__avatar-container"
-          onClick={handleEditAvatarClick}>
+          onClick={props.handleEditAvatarClick}>
           <img src="<%=require('./images/avatar.jpg')%>"
             alt="Аватар"
             className="avatar" />
@@ -23,7 +13,7 @@ function Main(props) {
           <h1 className="profile__name">Ваше имя...</h1>
           <button type="button"
             className="edit-button profile__edit-button edit-button_type_profile"
-            onClick={handleEditProfileClick}>
+            onClick={props.handleEditProfileClick}>
           </button>
           <p className="profile__about">О вас...</p>
         </div>

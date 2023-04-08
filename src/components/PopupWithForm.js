@@ -5,7 +5,7 @@ function PopupWithForm(props) {
       <div className="popup__container popup__container_type_edit-window">
         <button type="button"
           className="close-button popup__close-button"></button>
-        {/* ! props for h2 class needed */}
+        {/* ! props for h2 class confirmation popup needed */}
         <h2 className="popup__title popup__title_type_edit-window">{props.title}</h2>
         <form name={`${props.name}-form`}
           className="popup__form"
