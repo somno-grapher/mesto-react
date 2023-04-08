@@ -43,9 +43,7 @@ function App() {
             </ul>
           </section>
         </main>
-        <footer className="footer">
-          <p className="footer__copyright">©&nbsp;2022 Николай Майорников</p>
-        </footer>
+        <Footer />
       </div>
 
       <div className="popup popup_type_edit-profile">
