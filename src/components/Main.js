@@ -1,9 +1,9 @@
-function Main() {
+function Main(props) {
 
-  function handleAddPlaceClick() {
-    const addPlacePopup = document.querySelector('.popup_type_add-card');
-    addPlacePopup.classList.add('popup_opened');
-  }
+  // function handleAddPlaceClick() {
+  //   const addPlacePopup = document.querySelector('.popup_type_add-card');
+  //   addPlacePopup.classList.add('popup_opened');
+  // }
 
   function handleEditAvatarClick() {
     const editAvatarPopup = document.querySelector('.popup_type_update-avatar');
@@ -34,7 +34,7 @@ function Main() {
         </div>
         <button type="button"
           className="add-button profile__add-button add-button_type_card"
-          onClick={handleAddPlaceClick}>
+          onClick={props.handleAddPlaceClick}>
         </button>
       </section>
       <section className="photo-grid">
