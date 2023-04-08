@@ -1,8 +1,25 @@
 function Main() {
+
+  function handleAddPlaceClick() {
+    const addPlacePopup = document.querySelector('.popup_type_add-card');
+    addPlacePopup.classList.add('popup_opened');
+  }
+
+  function handleEditAvatarClick() {
+    const editAvatarPopup = document.querySelector('.popup_type_update-avatar');
+    editAvatarPopup.classList.add('popup_opened');
+  }
+
+  function handleEditProfileClick() {
+    const editProfilePopup = document.querySelector('.popup_type_edit-profile');
+    editProfilePopup.classList.add('popup_opened');
+  }
+
   return (
     <main className="content page__content">
       <section className="profile content__profile">
-        <button className="profile__avatar-container">
+        <button className="profile__avatar-container"
+          onClick={handleEditAvatarClick}>
           <img src="<%=require('./images/avatar.jpg')%>"
             alt="Аватар"
             className="avatar" />
@@ -10,11 +27,15 @@ function Main() {
         <div className="profile__info">
           <h1 className="profile__name">Ваше имя...</h1>
           <button type="button"
-            className="edit-button profile__edit-button edit-button_type_profile"></button>
+            className="edit-button profile__edit-button edit-button_type_profile"
+            onClick={handleEditProfileClick}>
+          </button>
           <p className="profile__about">О вас...</p>
         </div>
         <button type="button"
-          className="add-button profile__add-button add-button_type_card"></button>
+          className="add-button profile__add-button add-button_type_card"
+          onClick={handleAddPlaceClick}>
+        </button>
       </section>
       <section className="photo-grid">
         <ul className="photo-grid__list">
@@ -37,6 +58,7 @@ function Main() {
       </section>
     </main>
   );
+
 }
 
 export default Main;
