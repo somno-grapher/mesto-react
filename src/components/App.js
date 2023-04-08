@@ -1,4 +1,4 @@
-import logoPath from './images/logo/mesto-russia-logo.svg';
+import logoPath from '../images/logo/mesto-russia-logo.svg';
 
 function App() {
   return (
