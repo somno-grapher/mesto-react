@@ -1,10 +1,5 @@
 function Main(props) {
 
-  // function handleAddPlaceClick() {
-  //   const addPlacePopup = document.querySelector('.popup_type_add-card');
-  //   addPlacePopup.classList.add('popup_opened');
-  // }
-
   function handleEditAvatarClick() {
     const editAvatarPopup = document.querySelector('.popup_type_update-avatar');
     editAvatarPopup.classList.add('popup_opened');

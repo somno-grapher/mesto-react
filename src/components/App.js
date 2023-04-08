@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -5,9 +6,10 @@ import PopupWithForm from './PopupWithForm.js';
 
 function App() {
 
+  const [isAddPlacePopupOpen, setAddPlacePopupState] = React.useState(false);
+
   function handleAddPlaceClick() {
-    const addPlacePopup = document.querySelector('.popup_type_add-card');
-    addPlacePopup.classList.add('popup_opened');
+    setAddPlacePopupState(true);
   }
 
   return (
@@ -18,7 +20,7 @@ function App() {
         <Footer />
       </div>
 
-      <PopupWithForm title="Новое место" name="add-card">
+      <PopupWithForm title="Новое место" name="add-card" isOpen={isAddPlacePopupOpen}>
         <label className="popup__label">
           <input name="card-title"
             type="text"
