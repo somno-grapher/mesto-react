@@ -1,14 +1,12 @@
-import logoPath from '../images/logo/mesto-russia-logo.svg';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
 
 function App() {
   return (
     <>
       <div className="page">
-        <header className="header page__header">
-          <img src={logoPath}
-            alt="Логотип"
-            className="logo header__logo" />
-        </header>
+        <Header />
         <main className="content page__content">
           <section className="profile content__profile">
             <button className="profile__avatar-container">
@@ -32,14 +30,14 @@ function App() {
                   <button type="button"
                     className="delete-button card__delete-button"></button>
                   <img className="card__photo" />
-                    <div className="card__info">
-                      <h2 className="card__title"></h2>
-                      <div className="card__info-likes">
-                        <button type="button"
-                          className="like-button card__like-button"></button>
-                        <p className="card__counter-likes">55</p>
-                      </div>
+                  <div className="card__info">
+                    <h2 className="card__title"></h2>
+                    <div className="card__info-likes">
+                      <button type="button"
+                        className="like-button card__like-button"></button>
+                      <p className="card__counter-likes">55</p>
                     </div>
+                  </div>
                 </li>
               </template>
             </ul>
