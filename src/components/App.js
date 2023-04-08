@@ -3,12 +3,19 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
 
 function App() {
 
   const [isAddPlacePopupOpen, setAddPlacePopupState] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupState] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
+
+  function closeAllPopups() {
+    setAddPlacePopupState(false);
+    setEditAvatarPopupState(false);
+    setEditProfilePopupState(false);
+  }
 
   function handleAddPlaceClick() {
     setAddPlacePopupState(true);
@@ -34,7 +41,11 @@ function App() {
         <Footer />
       </div>
 
-      <PopupWithForm title="Новое место" name="add-card" isOpen={isAddPlacePopupOpen}>
+      <PopupWithForm
+        title="Новое место"
+        name="add-card"
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}>
         <label className="popup__label">
           <input name="card-title"
             type="text"
@@ -59,7 +70,11 @@ function App() {
           className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm title="Обновить аватар" name="update-avatar" isOpen={isEditAvatarPopupOpen}>
+      <PopupWithForm
+        title="Обновить аватар"
+        name="update-avatar"
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}>
         <label className="popup__label">
           <input name="avatar-link"
             type="url"
@@ -73,7 +88,11 @@ function App() {
           className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm title="Редактировать профиль" name="edit-profile" isOpen={isEditProfilePopupOpen}>
+      <PopupWithForm
+        title="Редактировать профиль"
+        name="edit-profile"
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}>
         <label className="popup__label">
           <input name="profile-name"
             type="text"
@@ -100,14 +119,16 @@ function App() {
           className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
-      <div className="popup popup_type_show-photo">
+      <ImagePopup />
+
+      {/* <div className="popup popup_type_show-photo">
         <figure className="popup__container popup__container_type_photo">
           <button type="button"
             className="close-button popup__close-button"></button>
           <img className="full-photo" />
           <figcaption className="popup__title popup__title_type_photo"></figcaption>
         </figure>
-      </div>
+      </div> */}
 
       <div className="popup popup_type_confirm">
         <div className="popup__container popup__container_type_edit-window">
