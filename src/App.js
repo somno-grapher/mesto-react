@@ -1,9 +1,11 @@
+import logoPath from './images/logo/mesto-russia-logo.svg';
+
 function App() {
   return (
     <>
       <div className="page">
         <header className="header page__header">
-          <img src="<%=require('./images/logo/mesto-russia-logo.svg')%>"
+          <img src={logoPath}
             alt="Логотип"
             className="logo header__logo" />
         </header>
