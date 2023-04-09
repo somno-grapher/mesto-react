@@ -14,24 +14,18 @@ function Main({
   const [userAvatar, setUserAvatar] = useState(avatarPlaceholderPath);
   const [cards, setCards] = useState([]);
 
-  useEffect(getInitialDataFromServer, []);
-
-  function getInitialDataFromServer() {
-    Promise.all([
-      api.getCurrentUser(),
-      api.getInitialCards()
-    ])
-      .then(([
-        jsonResponseUser,
-        jsonResponseCards
-      ]) => {
+  useEffect(() => {
+    Promise.all([api.getCurrentUser(), api.getInitialCards()])
+      .then(([jsonResponseUser, jsonResponseCards]) => {
         setUserName(jsonResponseUser.name);
         setUserDescription(jsonResponseUser.about);
         setUserAvatar(jsonResponseUser.avatar);
         setCards(jsonResponseCards);
       })
-      .catch(err => { console.log(err); });
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <main className="content page__content">
