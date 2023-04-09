@@ -1,5 +1,6 @@
 import api from '../utils/api';
 import avatarPlaceholderPath from '../images/avatar.jpg';
+import Card from './Card.js';
 import React from 'react';
 
 function Main(props) {
@@ -54,19 +55,7 @@ function Main(props) {
         <ul className="photo-grid__list">
           {cards.map((item) => {
             return (
-              <li className="card" key={item._id}>
-                <button type="button"
-                  className="delete-button card__delete-button"></button>
-                <img className="card__photo" src={item.link} alt={item.name} />
-                <div className="card__info">
-                  <h2 className="card__title">{item.name}</h2>
-                  <div className="card__info-likes">
-                    <button type="button"
-                      className="like-button card__like-button"></button>
-                    <p className="card__counter-likes">{item.likes.length}</p>
-                  </div>
-                </div>
-              </li>
+              <Card item={item} />
             )
           })}
         </ul>
