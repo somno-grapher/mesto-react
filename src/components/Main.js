@@ -7,24 +7,23 @@ function Main(props) {
   const [userName, setUserName] = React.useState('Ваше имя...');
   const [userDescription, setUserDescription] = React.useState('О вас...');
   const [userAvatar, setUserAvatar] = React.useState(avatarPlaceholderPath);
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(getInitialDataFromServer, []);
 
   function getInitialDataFromServer() {
     Promise.all([
       api.getCurrentUser(),
-      // api.getInitialCards()
+      api.getInitialCards()
     ])
       .then(([
         jsonResponseUser,
-        // jsonResponseCards
+        jsonResponseCards
       ]) => {
         setUserName(jsonResponseUser.name);
         setUserDescription(jsonResponseUser.about);
         setUserAvatar(jsonResponseUser.avatar);
-        // currentUserId = jsonResponseUser._id;
-        // userInfo.setInitialUserInfo(jsonResponseUser);
-        // photoGridList.generateAndAddInitialItems(jsonResponseCards);
+        setCards(jsonResponseCards);
       })
       .catch(err => { console.log(err); });
   }
@@ -53,21 +52,23 @@ function Main(props) {
       </section>
       <section className="photo-grid">
         <ul className="photo-grid__list">
-          <template id="card-template">
-            <li className="card">
-              <button type="button"
-                className="delete-button card__delete-button"></button>
-              <img className="card__photo" />
-              <div className="card__info">
-                <h2 className="card__title"></h2>
-                <div className="card__info-likes">
-                  <button type="button"
-                    className="like-button card__like-button"></button>
-                  <p className="card__counter-likes">55</p>
+          {cards.map((item) => {
+            return (
+              <li className="card" key={item._id}>
+                <button type="button"
+                  className="delete-button card__delete-button"></button>
+                <img className="card__photo" src={item.link} alt={item.name} />
+                <div className="card__info">
+                  <h2 className="card__title">{item.name}</h2>
+                  <div className="card__info-likes">
+                    <button type="button"
+                      className="like-button card__like-button"></button>
+                    <p className="card__counter-likes">{item.likes.length}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </template>
+              </li>
+            )
+          })}
         </ul>
       </section>
     </main>
