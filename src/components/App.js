@@ -49,10 +49,12 @@ function App() {
       </div>
 
       <PopupWithForm
-        title="Новое место"
-        name="add-card"
+        buttonText="Сохранить"
         isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}>
+        name="add-card"
+        onClose={closeAllPopups}
+        title="Новое место"
+      >
         <label className="popup__label">
           <input name="card-title"
             type="text"
@@ -73,15 +75,15 @@ function App() {
             required />
           <span className="card-link-input-error popup__error"></span>
         </label>
-        <button type="submit"
-          className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
       <PopupWithForm
-        title="Обновить аватар"
-        name="update-avatar"
+        buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}>
+        name="update-avatar"
+        onClose={closeAllPopups}
+        title="Обновить аватар"
+      >
         <label className="popup__label">
           <input name="avatar-link"
             type="url"
@@ -91,15 +93,15 @@ function App() {
             required />
           <span className="avatar-link-input-error popup__error"></span>
         </label>
-        <button type="submit"
-          className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
       <PopupWithForm
-        title="Редактировать профиль"
-        name="edit-profile"
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}      >
+        name="edit-profile"
+        onClose={closeAllPopups}
+        title="Редактировать профиль"
+      >
         <label className="popup__label">
           <input name="profile-name"
             type="text"
@@ -122,8 +124,6 @@ function App() {
             required />
           <span className="profile-about-input-error popup__error"></span>
         </label>
-        <button type="submit"
-          className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
       <ImagePopup
