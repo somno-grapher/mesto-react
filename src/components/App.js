@@ -8,12 +8,14 @@ import ImagePopup from './ImagePopup.js';
 function App() {
 
   const [isAddPlacePopupOpen, setAddPlacePopupState] = React.useState(false);
+  const [isConfirmPopupOpen, setConfirmPopupState] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupState] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
 
   function closeAllPopups() {
     setAddPlacePopupState(false);
+    setConfirmPopupState(false);
     setEditAvatarPopupState(false);
     setEditProfilePopupState(false);
     setSelectedCard({});
@@ -131,19 +133,14 @@ function App() {
         onClose={closeAllPopups}
       />
 
-      <div className="popup popup_type_confirm">
-        <div className="popup__container popup__container_type_edit-window">
-          <button type="button"
-            className="close-button popup__close-button"></button>
-          <h2 className="popup__title popup__title_type_confirm-window">Вы уверены?</h2>
-          <form name="confirm-form"
-            className="popup__form"
-            noValidate>
-            <button type="submit"
-              className="save-button popup__save-button">Да</button>
-          </form>
-        </div>
-      </div>
+      <PopupWithForm
+        buttonText="Да"
+        isOpen={isConfirmPopupOpen}
+        name="confirm"
+        onClose={closeAllPopups}
+        title="Вы уверены?"
+      >
+      </PopupWithForm>
 
     </>
   );
