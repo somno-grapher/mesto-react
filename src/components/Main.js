@@ -1,7 +1,7 @@
 import api from '../utils/api';
 import avatarPlaceholderPath from '../images/avatar.jpg';
 import Card from './Card.js';
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 function Main({
   handleAddPlaceClick,
@@ -9,12 +9,12 @@ function Main({
   handleEditProfileClick,
   onCardClick }) {
 
-  const [userName, setUserName] = React.useState('Ваше имя...');
-  const [userDescription, setUserDescription] = React.useState('О вас...');
-  const [userAvatar, setUserAvatar] = React.useState(avatarPlaceholderPath);
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState('Ваше имя...');
+  const [userDescription, setUserDescription] = useState('О вас...');
+  const [userAvatar, setUserAvatar] = useState(avatarPlaceholderPath);
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(getInitialDataFromServer, []);
+  useEffect(getInitialDataFromServer, []);
 
   function getInitialDataFromServer() {
     Promise.all([
