@@ -3,7 +3,11 @@ import avatarPlaceholderPath from '../images/avatar.jpg';
 import Card from './Card.js';
 import React from 'react';
 
-function Main(props) {
+function Main({
+  handleAddPlaceClick,
+  handleEditAvatarClick,
+  handleEditProfileClick,
+  onCardClick }) {
 
   const [userName, setUserName] = React.useState('Ваше имя...');
   const [userDescription, setUserDescription] = React.useState('О вас...');
@@ -33,7 +37,7 @@ function Main(props) {
     <main className="content page__content">
       <section className="profile content__profile">
         <button className="profile__avatar-container"
-          onClick={props.handleEditAvatarClick}>
+          onClick={handleEditAvatarClick}>
           <img src={userAvatar}
             alt="Аватар"
             className="avatar" />
@@ -42,13 +46,13 @@ function Main(props) {
           <h1 className="profile__name">{userName}</h1>
           <button type="button"
             className="edit-button profile__edit-button edit-button_type_profile"
-            onClick={props.handleEditProfileClick}>
+            onClick={handleEditProfileClick}>
           </button>
           <p className="profile__about">{userDescription}</p>
         </div>
         <button type="button"
           className="add-button profile__add-button add-button_type_card"
-          onClick={props.handleAddPlaceClick}>
+          onClick={handleAddPlaceClick}>
         </button>
       </section>
       <section className="photo-grid">
@@ -58,7 +62,7 @@ function Main(props) {
               <Card
                 key={card._id}
                 card={card}
-                onCardClick={props.onCardClick}
+                onCardClick={onCardClick}
               />
             )
           })}
