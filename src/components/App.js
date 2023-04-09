@@ -10,15 +10,21 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupState] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupState] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   function closeAllPopups() {
     setAddPlacePopupState(false);
     setEditAvatarPopupState(false);
     setEditProfilePopupState(false);
+    setSelectedCard({});
   }
 
   function handleAddPlaceClick() {
     setAddPlacePopupState(true);
+  }
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
   }
 
   function handleEditAvatarClick() {
@@ -37,6 +43,7 @@ function App() {
           handleAddPlaceClick={handleAddPlaceClick}
           handleEditAvatarClick={handleEditAvatarClick}
           handleEditProfileClick={handleEditProfileClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
       </div>
@@ -92,7 +99,7 @@ function App() {
         title="Редактировать профиль"
         name="edit-profile"
         isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}>
+        onClose={closeAllPopups}      >
         <label className="popup__label">
           <input name="profile-name"
             type="text"
@@ -119,7 +126,10 @@ function App() {
           className="save-button popup__save-button">Сохранить</button>
       </PopupWithForm>
 
-      <ImagePopup />
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
 
       {/* <div className="popup popup_type_show-photo">
         <figure className="popup__container popup__container_type_photo">
