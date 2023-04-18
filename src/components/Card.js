@@ -7,17 +7,20 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function Card({
   card,
   onCardClick,
+  onCardDelete,
   onCardLike }) {
 
   function handleCardClick() {
     onCardClick(card);
   }
 
+  function handleDeleteClick() {
+    onCardDelete(card);
+  }
+
   function handleLikeClick() {
     onCardLike(card);
   }
-
-  function handleDeleteClick() { }
 
   const currentUser = useContext(CurrentUserContext);
   const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -31,7 +34,7 @@ function Card({
     <li className="card">
       {isOwn &&
         <button
-          // TODO exlude type
+          // TODO exclude type
           // type="button"
           className="delete-button card__delete-button"
           onClick={handleDeleteClick}
@@ -47,7 +50,7 @@ function Card({
         <h2 className="card__title">{card.name}</h2>
         <div className="card__info-likes">
           <button
-            // TODO exlude type
+            // TODO exclude type
             // type="button"
             className={cardLikeButtonClassName}
             onClick={handleLikeClick}

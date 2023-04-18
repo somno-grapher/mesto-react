@@ -36,6 +36,17 @@ function App() {
     setSelectedCard(card);
   }
 
+  // TODO provide catch
+  function handleCardDelete(card) {
+    api.deleteCardFromServer(card._id)
+      .then(() => {
+        setCards((state) =>
+          state.filter((c) =>
+            c._id !== card._id));
+      });
+  }
+
+  // TODO provide catch
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.likeCard(card._id, isLiked)
@@ -78,6 +89,7 @@ function App() {
           handleEditAvatarClick={handleEditAvatarClick}
           handleEditProfileClick={handleEditProfileClick}
           onCardClick={handleCardClick}
+          onCardDelete={handleCardDelete}
           onCardLike={handleCardLike}
         />
         <Footer />

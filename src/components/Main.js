@@ -1,5 +1,5 @@
 // react import
-import { useEffect, useContext, useState } from 'react';
+import { useContext } from 'react';
 
 // project import
 import Card from './Card.js';
@@ -11,6 +11,7 @@ function Main({
   handleEditAvatarClick,
   handleEditProfileClick,
   onCardClick,
+  onCardDelete,
   onCardLike }) {
 
   const currentUser = useContext(CurrentUserContext);
@@ -45,6 +46,7 @@ function Main({
                 key={card._id}
                 card={card}
                 onCardClick={onCardClick}
+                onCardDelete={onCardDelete}
                 onCardLike={onCardLike}
               />
             )
