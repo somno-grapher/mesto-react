@@ -6,10 +6,15 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function Card({
   card,
-  onCardClick }) {
+  onCardClick,
+  onCardLike }) {
 
   function handleCardClick() {
     onCardClick(card);
+  }
+
+  function handleLikeClick() {
+    onCardLike(card);
   }
 
   function handleDeleteClick() { }
@@ -44,7 +49,9 @@ function Card({
           <button
             // TODO exlude type
             // type="button"
-            className={cardLikeButtonClassName}></button>
+            className={cardLikeButtonClassName}
+            onClick={handleLikeClick}
+          />
           <p className="card__counter-likes">{card.likes.length}</p>
         </div>
       </div>

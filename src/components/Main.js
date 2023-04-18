@@ -2,29 +2,18 @@
 import { useEffect, useContext, useState } from 'react';
 
 // project import
-import api from '../utils/api';
 import Card from './Card.js';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main({
+  cards,
   handleAddPlaceClick,
   handleEditAvatarClick,
   handleEditProfileClick,
-  onCardClick }) {
+  onCardClick,
+  onCardLike }) {
 
-  const [cards, setCards] = useState([]);
   const currentUser = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    // TODO exclude Promise.all
-    Promise.all([api.getInitialCards()])
-      .then(([jsonResponseCards]) => {
-        setCards(jsonResponseCards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <main className="content page__content">
@@ -56,6 +45,7 @@ function Main({
                 key={card._id}
                 card={card}
                 onCardClick={onCardClick}
+                onCardLike={onCardLike}
               />
             )
           })}

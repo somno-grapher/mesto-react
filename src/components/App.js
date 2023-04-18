@@ -12,6 +12,7 @@ import ImagePopup from './ImagePopup.js';
 
 function App() {
 
+  const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [isAddPlacePopupOpen, setAddPlacePopupState] = useState(false);
   const [isConfirmPopupOpen, setConfirmPopupState] = useState(false);
@@ -35,6 +36,16 @@ function App() {
     setSelectedCard(card);
   }
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    api.likeCard(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) =>
+            c._id === card._id ? newCard : c));
+      });
+  }
+
   function handleEditAvatarClick() {
     setEditAvatarPopupState(true);
   }
@@ -44,10 +55,10 @@ function App() {
   }
 
   useEffect(() => {
-    // TODO exclude Promise.all
-    Promise.all([api.getCurrentUser()])
-      .then(([jsonResponseUser]) => {
-        setCurrentUser(jsonResponseUser)
+    Promise.all([api.getCurrentUser(), api.getInitialCards()])
+      .then(([jsonResponseUser, jsonResponseCards]) => {
+        setCurrentUser(jsonResponseUser);
+        setCards(jsonResponseCards)
       })
       .catch((err) => {
         console.log(err);
@@ -62,10 +73,12 @@ function App() {
       <div className="page">
         <Header />
         <Main
+          cards={cards}
           handleAddPlaceClick={handleAddPlaceClick}
           handleEditAvatarClick={handleEditAvatarClick}
           handleEditProfileClick={handleEditProfileClick}
           onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
         />
         <Footer />
       </div>
