@@ -19,7 +19,7 @@ function PopupWithForm({
           noValidate>
           {children}
           <button type="submit"
-            className="save-button popup__save-button">{buttonText}</button>
+            className="save-button popup__save-button">{buttonText || 'Сохранить'}</button>
         </form>
       </div>
     </div>

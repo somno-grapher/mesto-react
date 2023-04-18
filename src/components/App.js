@@ -39,6 +39,10 @@ function App() {
 
   return (
     <>
+
+
+      {/* regular page */}
+
       <div className="page">
         <Header />
         <Main
@@ -50,10 +54,17 @@ function App() {
         <Footer />
       </div>
 
+
+      {/* popups */}
+
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
+
       <PopupWithForm
-        buttonText="Сохранить"
-        isOpen={isAddPlacePopupOpen}
         name="add-card"
+        isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
         title="Новое место"
       >
@@ -80,27 +91,17 @@ function App() {
       </PopupWithForm>
 
       <PopupWithForm
-        buttonText="Сохранить"
-        isOpen={isEditAvatarPopupOpen}
-        name="update-avatar"
+        name="confirm"
+        buttonText="Да"
+        isOpen={isConfirmPopupOpen}
         onClose={closeAllPopups}
-        title="Обновить аватар"
+        title="Вы уверены?"
       >
-        <label className="popup__label">
-          <input name="avatar-link"
-            type="url"
-            placeholder="Ссылка"
-            id="avatar-link-input"
-            className="input-field input-field_name_avatar-link popup__input"
-            required />
-          <span className="avatar-link-input-error popup__error"></span>
-        </label>
       </PopupWithForm>
 
       <PopupWithForm
-        buttonText="Сохранить"
-        isOpen={isEditProfilePopupOpen}
         name="edit-profile"
+        isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         title="Редактировать профиль"
       >
@@ -128,18 +129,21 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <ImagePopup
-        card={selectedCard}
-        onClose={closeAllPopups}
-      />
-
       <PopupWithForm
-        buttonText="Да"
-        isOpen={isConfirmPopupOpen}
-        name="confirm"
+        name="update-avatar"
+        isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        title="Вы уверены?"
+        title="Обновить аватар"
       >
+        <label className="popup__label">
+          <input name="avatar-link"
+            type="url"
+            placeholder="Ссылка"
+            id="avatar-link-input"
+            className="input-field input-field_name_avatar-link popup__input"
+            required />
+          <span className="avatar-link-input-error popup__error"></span>
+        </label>
       </PopupWithForm>
 
     </>
