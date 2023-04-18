@@ -1,7 +1,7 @@
 function ImagePopup({
   card,
   onClose }) {
-  const stateClass = card.link && 'popup_opened';
+  const stateClass = card.link ? 'popup_opened' : '';
   return (
     <div className={`popup popup_type_show-photo ${stateClass}`} >
       <figure className="popup__container popup__container_type_photo">

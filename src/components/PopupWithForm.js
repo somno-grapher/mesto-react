@@ -5,7 +5,7 @@ function PopupWithForm({
   name,
   onClose,
   title }) {
-  const stateClass = isOpen && 'popup_opened';
+  const stateClass = isOpen ? 'popup_opened' : '';
   return (
     <div className={`popup popup_type_${name} ${stateClass}`}>
       <div className="popup__container popup__container_type_edit-window">
