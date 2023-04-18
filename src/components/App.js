@@ -1,4 +1,9 @@
-import React from 'react';
+// react import
+import { useEffect, useState } from 'react';
+
+// project import
+import api from '../utils/api';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -7,11 +12,12 @@ import ImagePopup from './ImagePopup.js';
 
 function App() {
 
-  const [isAddPlacePopupOpen, setAddPlacePopupState] = React.useState(false);
-  const [isConfirmPopupOpen, setConfirmPopupState] = React.useState(false);
-  const [isEditAvatarPopupOpen, setEditAvatarPopupState] = React.useState(false);
-  const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [isAddPlacePopupOpen, setAddPlacePopupState] = useState(false);
+  const [isConfirmPopupOpen, setConfirmPopupState] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupState] = useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupState] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   function closeAllPopups() {
     setAddPlacePopupState(false);
@@ -37,9 +43,19 @@ function App() {
     setEditProfilePopupState(true);
   }
 
-  return (
-    <>
+  useEffect(() => {
+    // TODO exclude Promise.all
+    Promise.all([api.getCurrentUser()])
+      .then(([jsonResponseUser]) => {
+        setCurrentUser(jsonResponseUser)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
 
       {/* regular page */}
 
@@ -146,7 +162,7 @@ function App() {
         </label>
       </PopupWithForm>
 
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
