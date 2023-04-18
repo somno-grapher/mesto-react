@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // project import
 import api from '../utils/api';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -140,35 +141,10 @@ function App() {
       >
       </PopupWithForm>
 
-      <PopupWithForm
-        name="edit-profile"
+      <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
-        title="Редактировать профиль"
-      >
-        <label className="popup__label">
-          <input name="profile-name"
-            type="text"
-            placeholder="Имя"
-            id="profile-name-input"
-            className="input-field input-field_name_profile-name popup__input"
-            minLength="2"
-            maxLength="40"
-            required />
-          <span className="profile-name-input-error popup__error"></span>
-        </label>
-        <label className="popup__label">
-          <input name="profile-about"
-            type="text"
-            placeholder="О себе"
-            id="profile-about-input"
-            className="input-field input-field_name_profile-about popup__input"
-            minLength="2"
-            maxLength="200"
-            required />
-          <span className="profile-about-input-error popup__error"></span>
-        </label>
-      </PopupWithForm>
+      />
 
       <PopupWithForm
         name="update-avatar"
