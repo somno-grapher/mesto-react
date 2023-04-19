@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import api from '../utils/api';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
@@ -68,6 +69,17 @@ function App() {
 
   function handleEditProfileClick() {
     setEditProfilePopupState(true);
+  }
+
+  function handleUpdateAvatar({ avatar: link }) {
+    api.updateAvatar({ link })
+      .then((jsonResponseUser) => {
+        setCurrentUser(jsonResponseUser);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateUser({ name, about }) {
@@ -162,22 +174,11 @@ function App() {
         onUpdateUser={handleUpdateUser}
       />
 
-      <PopupWithForm
-        name="update-avatar"
+      <EditAvatarPopup
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        title="Обновить аватар"
-      >
-        <label className="popup__label">
-          <input name="avatar-link"
-            type="url"
-            placeholder="Ссылка"
-            id="avatar-link-input"
-            className="input-field input-field_name_avatar-link popup__input"
-            required />
-          <span className="avatar-link-input-error popup__error"></span>
-        </label>
-      </PopupWithForm>
+        onUpdateAvatar={handleUpdateAvatar}
+      />
 
     </CurrentUserContext.Provider>
   );
