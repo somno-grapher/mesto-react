@@ -37,17 +37,18 @@ function App() {
     setSelectedCard(card);
   }
 
-  // TODO provide catch
   function handleCardDelete(card) {
     api.deleteCardFromServer(card._id)
       .then(() => {
         setCards((state) =>
           state.filter((c) =>
             c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
-  // TODO provide catch
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.likeCard(card._id, isLiked)
@@ -55,6 +56,9 @@ function App() {
         setCards((state) =>
           state.map((c) =>
             c._id === card._id ? newCard : c));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -64,6 +68,17 @@ function App() {
 
   function handleEditProfileClick() {
     setEditProfilePopupState(true);
+  }
+
+  function handleUpdateUser({ name, about }) {
+    api.patchUserInfo({ name, about })
+      .then((jsonResponseUser) => {
+        setCurrentUser(jsonResponseUser);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -144,6 +159,7 @@ function App() {
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
       />
 
       <PopupWithForm

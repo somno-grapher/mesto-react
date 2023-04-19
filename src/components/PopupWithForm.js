@@ -1,10 +1,12 @@
 function PopupWithForm({
-  buttonText,
-  children,
+  buttonText, // has default value
   isOpen,
   name,
   onClose,
-  title }) {
+  onSubmit,
+  title,
+  children
+}) {
   const stateClass = isOpen ? 'popup_opened' : '';
   return (
     <div className={`popup popup_type_${name} ${stateClass}`}>
@@ -14,12 +16,19 @@ function PopupWithForm({
           onClick={onClose}>
         </button>
         <h2 className="popup__title popup__title_type_edit-window">{title}</h2>
-        <form name={`${name}-form`}
+        <form
+          name={`${name}-form`}
           className="popup__form"
-          noValidate>
+          noValidate
+          onSubmit={onSubmit}
+        >
           {children}
-          <button type="submit"
-            className="save-button popup__save-button">{buttonText || 'Сохранить'}</button>
+          <button
+            type="submit"
+            className="save-button popup__save-button"
+          >
+            {buttonText || 'Сохранить'}
+          </button>
         </form>
       </div>
     </div>
