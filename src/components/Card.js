@@ -34,8 +34,7 @@ function Card({
     <li className="card">
       {isOwn &&
         <button
-          // TODO exclude type
-          // type="button"
+          type="button"
           className="delete-button card__delete-button"
           onClick={handleDeleteClick}
         />
@@ -50,8 +49,7 @@ function Card({
         <h2 className="card__title">{card.name}</h2>
         <div className="card__info-likes">
           <button
-            // TODO exclude type
-            // type="button"
+            type="button"
             className={cardLikeButtonClassName}
             onClick={handleLikeClick}
           />

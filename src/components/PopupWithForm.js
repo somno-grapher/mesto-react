@@ -11,7 +11,8 @@ function PopupWithForm({
   return (
     <div className={`popup popup_type_${name} ${stateClass}`}>
       <div className="popup__container popup__container_type_edit-window">
-        <button type="button"
+        <button
+          type="button"
           className="close-button popup__close-button"
           onClick={onClose}>
         </button>

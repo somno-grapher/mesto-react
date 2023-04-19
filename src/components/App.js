@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 // project import
+import AddPlacePopup from './AddPlacePopup';
 import api from '../utils/api';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
@@ -32,6 +33,17 @@ function App() {
 
   function handleAddPlaceClick() {
     setAddPlacePopupState(true);
+  }
+
+  function handleAddPlaceSubmit({ name, link }) {
+    api.postCard({ name, link })
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardClick(card) {
@@ -126,38 +138,28 @@ function App() {
 
       {/* popups */}
 
+      <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlace={handleAddPlaceSubmit}
+      />
+
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
+      />
+
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
+      />
+
       <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}
       />
-
-      <PopupWithForm
-        name="add-card"
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-        title="Новое место"
-      >
-        <label className="popup__label">
-          <input name="card-title"
-            type="text"
-            placeholder="Название"
-            id="card-title-input"
-            className="input-field input-field_name_card-title popup__input"
-            minLength="2"
-            maxLength="30"
-            required />
-          <span className="card-title-input-error popup__error"></span>
-        </label>
-        <label className="popup__label">
-          <input name="card-photo-link"
-            type="url"
-            placeholder="Ссылка"
-            id="card-link-input"
-            className="input-field input-field_name_card-photo-link popup__input"
-            required />
-          <span className="card-link-input-error popup__error"></span>
-        </label>
-      </PopupWithForm>
 
       <PopupWithForm
         name="confirm"
@@ -167,18 +169,6 @@ function App() {
         title="Вы уверены?"
       >
       </PopupWithForm>
-
-      <EditProfilePopup
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        onUpdateUser={handleUpdateUser}
-      />
-
-      <EditAvatarPopup
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onUpdateAvatar={handleUpdateAvatar}
-      />
 
     </CurrentUserContext.Provider>
   );
