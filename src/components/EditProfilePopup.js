@@ -32,9 +32,10 @@ function EditProfilePopup({
   const [name, setName] = useState('');
 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]);
+    setName(currentUser.name || '');
+    setDescription(currentUser.about || '');
+  },
+    [currentUser]);
 
   return (
     <PopupWithForm
